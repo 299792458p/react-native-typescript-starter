@@ -30,7 +30,6 @@ target 'ReactNativeTypescriptStarter' do
 
   pod 'ReactNativeNavigation', :path => '../node_modules/react-native-navigation'
 
-  pod 'CodePush', :path => '../node_modules/react-native-code-push'
 
   target 'ReactNativeTypescriptStarterTests' do
     inherit! :search_paths

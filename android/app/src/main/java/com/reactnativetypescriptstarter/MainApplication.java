@@ -15,7 +15,7 @@ import com.reactnativenavigation.react.ReactGateway;
 import java.util.Arrays;
 import java.util.List;
 
-import com.microsoft.codepush.react.CodePush;
+// import com.microsoft.codepush.react.CodePush;
 
 public class MainApplication extends NavigationApplication {
 
@@ -42,7 +42,7 @@ public class MainApplication extends NavigationApplication {
     List<ReactPackage> packages = new PackageList(this).getPackages();
     // Packages that cannot be autolinked yet can be added manually here, for example:
     // packages.add(new MyReactNativePackage());
-    packages.add(new CodePush(BuildConfig.ANDROID_CODEPUSH_DEPLOYMENT_KEY, MainApplication.this, BuildConfig.DEBUG));
+    // packages.add(new CodePush(BuildConfig.ANDROID_CODEPUSH_DEPLOYMENT_KEY, MainApplication.this, BuildConfig.DEBUG));
     return packages;
   }
 
