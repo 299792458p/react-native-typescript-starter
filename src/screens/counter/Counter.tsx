@@ -1,7 +1,10 @@
-import React, { useContext } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components/native';
 import { Button } from '../../components/button/Button';
-import { CounterContext } from '../../contexts/CounterContext';
+import { connect } from 'react-redux';
+import { uiActionCreators } from '../../redux/modules/data/actions';
+import { Dispatch } from 'redux';
+import { Navigation } from 'react-native-navigation';
 
 const Main = styled.View`
   flex: 1;
@@ -30,34 +33,61 @@ const ActionButton = styled(Button)`
   flex: 1;
 `;
 
-export function CounterScreen() {
-  const { counter, increment, decrement } = useContext(CounterContext);
-  return (
-    <Main testID="COUNTER_SCREEN">
-      <Content>
-        <Text>Counter: {counter}</Text>
-      </Content>
-      <Actions>
-        <ActionButton
-          title="Decrement"
-          onPress={decrement}
-          testID="BUTTON_DECREMENT"
-        />
-        <Spacer />
-        <ActionButton
-          title="Increment"
-          onPress={increment}
-          testID="BUTTON_INCREMENT"
-        />
-      </Actions>
-    </Main>
-  );
+interface IProps {
+  ui: any;
+  increment: () => {};
+  decrement: () => {};
 }
 
-CounterScreen.options = {
-  topBar: {
-    title: {
-      text: 'Counter',
+class CounterScreen extends PureComponent<IProps> {
+
+  static navigationOptions = {
+    topBar: {
+      title: {
+        text: 'Counter',
+      },
     },
-  },
-};
+  };
+
+  constructor(props: any) {
+    super(props);
+    Navigation.events().bindComponent(this);
+  }
+
+  render() {
+    const { ui, increment, decrement } = this.props;
+
+    return (
+      <Main testID="COUNTER_SCREEN">
+        <Content>
+          <Text>Counter: {ui.counter}</Text>
+        </Content>
+        <Actions>
+          <ActionButton
+            title="Decrement"
+            onPress={decrement}
+            testID="BUTTON_DECREMENT"
+          />
+          <Spacer />
+          <ActionButton
+            title="Increment"
+            onPress={increment}
+            testID="BUTTON_INCREMENT"
+          />
+        </Actions>
+      </Main>
+    );
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: any) => ({
+  increment: () => dispatch(uiActionCreators.increment()),
+  decrement: () => dispatch(uiActionCreators.decrement()),
+})
+
+const mapStateToProps = (state: any, ownProps: any) => ({
+  ui: state.data.ui
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CounterScreen);
+

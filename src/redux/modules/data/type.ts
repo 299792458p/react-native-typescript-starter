@@ -1,10 +1,10 @@
 export interface IAppAction<P> {
-  type?: string,
+  type: string,
   payload?: P
 }
 
 export interface IAppState {
   ui: {
-    loaderVisibility: boolean;
+    counter: number;
   }
 }

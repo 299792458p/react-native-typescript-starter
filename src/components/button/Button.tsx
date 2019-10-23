@@ -44,9 +44,9 @@ export const Button = (props: ButtonProps) => {
     accessibilityTraits.push('disabled');
   }
 
-  const Touchable: any =
+  const Touchable: typeof React.Component =
     Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
-  const titleLabel =
+  const titleLabel: string =
     Platform.OS === 'android' ? title.toLocaleUpperCase() : title;
 
   return (

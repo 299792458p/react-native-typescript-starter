@@ -1,15 +1,14 @@
 import { Navigation } from 'react-native-navigation';
-import { withCounterContext } from '../contexts/CounterContext';
-import { CounterScreen } from './counter/Counter';
 import { HomeScreen } from './home/Home';
+import CounterScreen from './counter/Counter';
 
 export const Screens = new Map();
 
-export const HOME = 'ueno-rns.Home';
-export const COUNTER = 'ueno-rns.Counter';
+export const HOME = 'Home';
+export const COUNTER = 'Counter';
 
 Screens.set(HOME, HomeScreen);
-Screens.set(COUNTER, withCounterContext(CounterScreen));
+Screens.set(COUNTER, CounterScreen);
 
 export const startApp = () => {
   Navigation.setRoot({

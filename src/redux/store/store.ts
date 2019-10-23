@@ -1,17 +1,18 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-// import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, compose, Middleware } from 'redux';
+import thunk from 'redux-thunk';
 import { persistStore } from 'redux-persist';
 import { createLogger } from 'redux-logger';
-
 // import { composeWithDevTools } from 'remote-redux-devtools';
 
 import rootReducer from './reducers';
 
 export default function initializeStore() {
 
-  const middlewares = [
-    // thunk.withExtraArgument(),
-    __DEV__ ? createLogger() : null
+  const devLogger: Middleware | undefined = __DEV__ ? createLogger() : undefined;
+
+  const middlewares: any[] = [
+    thunk,
+    devLogger
   ].filter(Boolean);
 
   const debugWrapper = (data: any) => data;
@@ -22,7 +23,7 @@ export default function initializeStore() {
   const store = createStore(
     rootReducer,
     {},
-    // debugWrapper(compose(applyMiddleware(...middlewares)))
+    debugWrapper(compose(applyMiddleware(...middlewares)))
   );
 
   persistStore(

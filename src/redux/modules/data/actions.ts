@@ -1,13 +1,13 @@
 import { createAction } from 'typesafe-actions';
 
-export const UI_LOADING_ON = '@UI/LOADING_ON';
-export const UI_LOADING_OFF = '@UI/LOADING_OFF';
+export const UI_COUNTER_INC = 'UI_COUNTER_INC';
+export const UI_COUNTER_DEC = 'UI_COUNTER_DEC';
 
 export const uiActionCreators = {
-  loadinOn: createAction(UI_LOADING_ON, action => {
-    return () => action(true);
+  increment: createAction(UI_COUNTER_INC, action => {
+    return () => action();
   }),
-  loadinOff: createAction(UI_LOADING_ON, action => {
-    return () => action(false);
+  decrement: createAction(UI_COUNTER_DEC, action => {
+    return () => action();
   })
 }
