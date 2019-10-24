@@ -3,8 +3,10 @@ export interface IAppAction<P> {
   payload?: P
 }
 
+export interface IUIState {
+  counter: number;
+}
+
 export interface IAppState {
-  ui: {
-    counter: number;
-  }
+  ui: IUIState;
 }

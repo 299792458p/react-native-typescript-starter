@@ -4,7 +4,7 @@ import { persistStore } from 'redux-persist';
 import { createLogger } from 'redux-logger';
 // import { composeWithDevTools } from 'remote-redux-devtools';
 
-import rootReducer from './reducers';
+import persistedReducer from './reducers';
 
 export default function initializeStore() {
 
@@ -21,7 +21,7 @@ export default function initializeStore() {
   // }
 
   const store = createStore(
-    rootReducer,
+    persistedReducer,
     {},
     debugWrapper(compose(applyMiddleware(...middlewares)))
   );

@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Props } from 'react';
 import styled from 'styled-components/native';
 import { Button } from '../../components/button/Button';
 import { connect } from 'react-redux';
 import { uiActionCreators } from '../../redux/modules/data/actions';
 import { Dispatch } from 'redux';
 import { Navigation } from 'react-native-navigation';
+import { IAppState } from '../../redux/modules/data/type';
 
 const Main = styled.View`
   flex: 1;
@@ -49,9 +50,12 @@ class CounterScreen extends PureComponent<IProps> {
     },
   };
 
-  constructor(props: any) {
+  constructor(props: IProps) {
     super(props);
     Navigation.events().bindComponent(this);
+    this.state = {
+      label: 'Counter'
+    }
   }
 
   render() {
@@ -80,13 +84,13 @@ class CounterScreen extends PureComponent<IProps> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   increment: () => dispatch(uiActionCreators.increment()),
   decrement: () => dispatch(uiActionCreators.decrement()),
 })
 
-const mapStateToProps = (state: any, ownProps: any) => ({
-  ui: state.data.ui
+const mapStateToProps = (state: IAppState) => ({
+  ui: state.ui
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CounterScreen);

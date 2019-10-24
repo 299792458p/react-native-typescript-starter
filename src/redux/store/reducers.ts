@@ -1,19 +1,13 @@
-import { persistCombineReducers } from 'redux-persist';
+import { persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {
-  data
-} from '../modules';
+import combinedReducer from '../modules';
 
 const config = {
   key: 'LIFTED_REDUX_STORE',
   storage: AsyncStorage
 };
 
-const appReducer = persistCombineReducers(config, {
-  data,
-});
+const persistedReducer = persistReducer(config, combinedReducer);
 
-export default function rootReducer(state: any, action: any) {
-  return appReducer(state, action);
-}
+export default persistedReducer;

@@ -1,1 +1,3 @@
-export * from './data';
+import combinedReducer from './data';
+
+export default combinedReducer;
